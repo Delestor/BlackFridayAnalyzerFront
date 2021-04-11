@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "blackfridayanalyzerapp"
+    }
+  },
+  "defaultProject": "blackfridayanalyzerapp",
+  "cli": {
+    "analytics": "6b392cb5-7122-4b11-8f6f-6661f3ae203d"
+  }
 }
