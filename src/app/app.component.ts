@@ -8,23 +8,6 @@ import { ProductService } from './product/product.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  public products : Product[];
-
-  constructor(private productService: ProductService){}
-
-  ngOnInit(){
-    this.getProducts();
-  }
-
-  public getProducts(): void{
-    this.productService.getProducts().subscribe(
-      (response: Product[]) => {
-        this.products = response;
-      },
-      (error: HttpErrorResponse) => {
-        alert (error.message);
-      }
-    );
-  }
+export class AppComponent {
+  title = "Black Friday Analyzer App";
 }
