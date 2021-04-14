@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from './product';
 import { ProductService } from './product.service';
 import { NgForm } from '@angular/forms';
+import { Price } from './price';
 
 @Component({
   selector: 'app-product',
@@ -13,6 +14,7 @@ export class ProductComponent implements OnInit{
   public products : Product[];
   public editProduct: Product;
   public deleteProduct: Product;
+  public newPrice : Price;
 
   constructor(private productService: ProductService){}
 
@@ -46,7 +48,20 @@ export class ProductComponent implements OnInit{
     );
   }
 
-  public onUpdateEmloyee(product: Product): void {
+  public onAddPrice(productId: number, addPriceForm : NgForm):void{
+    document.getElementById('add-price-to-product-form').click();
+    this.productService.addPrice(productId, addPriceForm.value).subscribe(
+      (response: Product) => {
+        console.log(response);
+        this.getProducts();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public onUpdateProduct(product: Product): void {
     this.productService.updateProduct(product).subscribe(
       (response: Product) => {
         console.log(response);
@@ -90,7 +105,7 @@ export class ProductComponent implements OnInit{
       button.setAttribute('data-target', '#deleteProductModal');
     }
     if (mode === 'addPrice') {
-      this.deleteProduct = product;
+      this.editProduct = product;
       button.setAttribute('data-target', '#addPriceModal');
     }
     container.appendChild(button);
