@@ -46,6 +46,18 @@ export class ProductComponent implements OnInit{
     );
   }
 
+  public onUpdateEmloyee(product: Product): void {
+    this.productService.updateProduct(product).subscribe(
+      (response: Product) => {
+        console.log(response);
+        this.getProducts();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
   public searchProducts(key: string): void {
     console.log(key);
     const results: Product[] = [];
@@ -76,6 +88,10 @@ export class ProductComponent implements OnInit{
     if (mode === 'delete') {
       this.deleteProduct = product;
       button.setAttribute('data-target', '#deleteProductModal');
+    }
+    if (mode === 'addPrice') {
+      this.deleteProduct = product;
+      button.setAttribute('data-target', '#addPriceModal');
     }
     container.appendChild(button);
     button.click();
