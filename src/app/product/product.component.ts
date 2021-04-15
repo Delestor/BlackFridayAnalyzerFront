@@ -73,6 +73,18 @@ export class ProductComponent implements OnInit{
     );
   }
 
+  public onDeleteProduct(productId: number){
+    this.productService.deleteProduct(productId).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.getProducts();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
   public searchProducts(key: string): void {
     console.log(key);
     const results: Product[] = [];
